@@ -1,0 +1,30 @@
+﻿@model IEnumerable<VenueViewModel>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> _signInManager
+@inject UserManager<IdentityUser> _userManager
+@{
+    ViewData["Title"] = "ListVenues";
+}
+@{
+    var user = await _userManager.GetUserAsync(User);
+    var email = user != null ? user.Email : "";
+}
+<div class="home-container p-4">
+    <div class="row">
+        <h1 class="text-center">Venues</h1>
+        <ul class="list-group pt-4">
+            @{
+                int venueIterator = 0;
+            }
+            @foreach (var venue in Model)
+            {
+                ViewData["PositionFromStart"] = ++venueIterator;
+                <li class="list-group-item">
+                    <div>
+                        <partial name="VenueDetailsIndexPage" model="new List<VenueViewModel> { venue }" />
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

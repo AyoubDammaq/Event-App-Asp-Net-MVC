@@ -1,0 +1,84 @@
+﻿@model VenueViewModel;
+@{
+    ViewData["Title"] = "ViewVenueDetails";
+}
+
+<div class="event-wrapper pt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="text-center">@Model.Name</h1>
+        @if (Model.MaxCapacity <= 1)
+        {
+            <div><a class="btn btn-sm btn-danger" asp-controller="Venue" asp-action="UpdateVenue" asp-route-Id="@Model.Id">Edit <i class="fa-solid fa-pen-to-square"></i></a></div>
+
+        }
+    </div>
+
+    <hr />
+    <div class="row pt-3">
+        <div class="col-sm-6">
+            <h4>Description</h4>
+            @if (Model.Description != null)
+            {
+                <p>@Model.Description</p>
+            }
+            else
+            {
+                <p>No Description</p>
+            }
+            <h5>Other Details</h5>
+            @if (Model.ManagerName != null)
+            {
+                <p>@Model.ManagerName</p>
+            }
+            else
+            {
+                <p>No Details</p>
+            }
+        </div>
+        <div class="col-sm-6">
+            <ul class="list-group">
+                <li class="list-group-item"><i class="fa-solid fa-calendar"></i> <span>Location</span> @Model.Location</li>
+               
+                
+                
+                <li class="list-group-item"><i class="fa-solid fa-lock"></i>  <span>Manager Phone Number</span> @Model.ManagerPhoneNumber</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    <div class="row py-4">
+        <div class="col d-flex flex-column">
+            <h1>Events</h1>
+            <hr />
+            <div class="row">
+               
+                <div class="col-sm-6">
+                    @if (Model.Events.Count != 0)
+                    {
+                        <div class="row py-3">
+                            <h3>Previous Comments</h3>
+                            @foreach (var i in Model.Events)
+                            {
+                                <div class="row pt-2">
+                                    <div class="col">
+                                        <ul class="list-group">
+                                            <li class="list-group-item list-group-item-success"><i class="fa-solid fa-comment"></i> @i.Title</li>
+                                            <li class="list-group-item list-group-item-success"><i class="fa-solid fa-comment"></i> @i.Type</li>
+                                            <li class="list-group-item list-group-item-success"><i class="fa-solid fa-comment"></i> @i.Date</li>
+                                            <li class="list-group-item list-group-item-success"><i class="fa-solid fa-comment"></i> @i.StartTime</li>
+                                            <li class="list-group-item list-group-item-success"><i class="fa-solid fa-comment"></i> @i.DurationInHours</li>
+                                            <li class="list-group-item list-group-item-success"><i class="fa-solid fa-comment"></i> @i.Description</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
